@@ -1,0 +1,73 @@
+#!/bin/sh
+
+mount -t debugfs debugfs /sys/kernel/debug
+#insmod /lib/modules/`uname -r`/kernel/net/wireless/cfg80211.ko
+#insmod /lib/modules/`uname -r`/cfg80211.ko
+#insmod /lib/modules/`uname -r`/kernel/net/mac80211/mac80211.ko
+
+#setup eth0
+echo "<< Setup eth0 >>"
+ifconfig eth0 up
+#ifconfig eth0 10.0.0.10
+
+#setup eth1
+echo "<< Setup eth1 >>"
+ifconfig eth1 up
+#ifconfig eth1 10.1.1.10
+
+# Turn-On Blue LED
+#echo 1 > /sys/class/leds/LED_BLUE/brightness
+
+# Enable LCD_CS
+echo "Enable LCD CS"
+echo 198 > /sys/class/gpio/export
+echo high > /sys/class/gpio/gpio198/direction
+
+# Turn-On LCD Backlight & Full PWM
+echo "Tune-ON LCD backlight"
+echo 1 > /sys/class/backlight/backlight/bl_power
+#echo "Wait 5 sec for Level-0 PWM Birghtness"
+echo 1 > /sys/class/backlight/backlight/brightness
+#echo "Wait 5 sec for Level-3 PWM Birghtness"
+#echo 3 > /sys/class/backlight/backlight/brightness
+#sleep 5
+
+# Turn-On WiFi Power
+echo "TurnOn WiFi 3.3V power"
+echo 208 > /sys/class/gpio/export
+echo high > /sys/class/gpio/gpio208/direction
+
+# Turn-On LTE Power & Reset
+echo "TurnOn LTE 3.3V power & Reset"
+echo 209 > /sys/class/gpio/export
+echo high > /sys/class/gpio/gpio209/direction
+# Setup LTE Reset
+#echo 39 > /sys/class/gpio/export
+#echo out > /sys/class/gpio/gpio39/direction
+#echo 0 > /sys/class/gpio/gpio39/value
+#sleep 1
+#echo 1 > /sys/class/gpio/gpio39/value
+
+# Start all init scripts in /etc/init.d
+# executing them in numerical order.
+#
+for i in /etc/init.d/S??* ;do
+
+     # Ignore dangling symlinks (if any).
+     [ ! -f "$i" ] && continue
+
+     case "$i" in
+	*.sh)
+	    # Source shell script for speed.
+	    (
+		trap - INT QUIT TSTP
+		set start
+		. $i
+	    )
+	    ;;
+	*)
+	    # No sh extension, so fork subprocess.
+	    $i start
+	    ;;
+    esac
+done

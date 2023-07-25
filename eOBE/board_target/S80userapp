@@ -1,0 +1,22 @@
+#! /bin/sh
+
+insmod /lib/modules/`uname -r`/8821cu.ko
+
+#setup wlan0
+echo "<< Setup wlan0 >>"
+iw reg set TW
+iw dev wlan0 set power_save off
+ifconfig wlan0 up
+
+# Dail LTE EC21
+#/etc/ppp/peers/quectel-pppd.sh &
+
+# Run M4 APP
+#echo "User M4 APP Running..."
+#echo stop > /sys/class/remoteproc/remoteproc0/state
+#echo -n EPDTest.elf > /sys/class/remoteproc/remoteproc0/firmware
+#echo start > /sys/class/remoteproc/remoteproc0/state
+
+# Run A35 APP
+echo "User A35 APP Running..."
+./root/MA35D1_EPMII &
