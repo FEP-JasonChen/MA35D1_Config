@@ -65,25 +65,31 @@ cp -f ./${ProName}/board_target/S80userapp $S80userappPath
 echo "copy $ProName rcS file ..."
 cp -f ./${ProName}/board_target/rcS $rcSPath
 
-# copy network interfaces file
-echo "copy network interfaces file ..."
+# copy common - AutoRoot (inittab/passwd/shadow) files
+echo "copy common - AutoRoot (inittab/passwd/shadow) files ..."
+cp -f ./common/inittab $etcPath
+cp -f ./common/passwd $etcPath
+cp -f ./common/shadow $etcPath
+
+# copy common - interfaces file
+echo "copy common - network interfaces file ..."
 cp -f ./common/interfaces $etcPath/network
 
-# copy wpa config files
-echo "copy wpa config file ..."
+# copy common - wpa config files
+echo "copy common - wpa config file ..."
 cp -f ./common/wpa_supplicant_open.conf $etcPath
 cp -f ./common/wpa_supplicant_wpa2.conf $etcPath
 
-# copy fstab file
-echo "copy $ProName fstab file ..."
+# copy common - fstab file
+echo "copy common - fstab file ..."
 cp -f ./common/fstab $fstabPath
 
-# copy mount folder file
-echo "copy $ProName mount folder ..."
+# copy common - mount folder file
+echo "copy common - mount folder ..."
 cp -rf ./common/SDBackup $mountFolderPath
 
-# copy firmware file
-echo "copy $ProName firmware folder ..."
+# copy common - firmware file
+echo "copy common - firmware folder ..."
 cp -rf ./common/firmware $firmwareFolderPath
 
 nowTime=$(TZ=Asia/Taipei date -d @`date +%s` "+%Y-%m-%d %H:%M:%S")
