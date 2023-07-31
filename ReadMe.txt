@@ -29,16 +29,28 @@ C. 執行./MA35D1_ProConfig.sh [ProName], "ProName為專案資料夾名稱, Shel
 	***** buildroot-deconfig *****
 	1. 複製[ProName]_buildroot.config至下列路徑
 		~/buildroot/MA35D1_Buildroot/
+	***** 開機初始IO設定檔 *****
+	1. 複製ma35d1_common.c至下列路徑
+		~/home/user/shared/buildroot/MA35D1_Buildroot/output/build/arm-trusted-firmware-custom/plat/nuvoton/ma35d1
+	***** 使用者自訂Linux啟動程序檔 *****
+	1. 複製S80userapp至下列路徑
+		~/home/user/shared/buildroot/MA35D1_Buildroot/output/target/etc/init.d
 	***** Linux rcS 啟動設定檔 *****
 	1. 複製rcS至下列路徑
-		~/home/user/shared/buildroot/MA35D1_Buildroot/output/target/etc/init.d/
+		~/home/user/shared/buildroot/MA35D1_Buildroot/output/target/etc/init.d
+	***** 開機不需輸入root設定檔 *****
+	1. 複製inittab/passwd/shadow至下列路徑
+		~/home/user/shared/buildroot/MA35D1_Buildroot/output/target/etc
+	***** 預設網路參數設定檔 *****
+	1. 複製interfaces至下列路徑
+		~/home/user/shared/buildroot/MA35D1_Buildroot/output/target/etc/network
 	***** Linux fstab 磁區設定檔 *****
 	1. 複製fstab至下列路徑
 		~/home/user/shared/buildroot/MA35D1_Buildroot/output/target/etc/
 	***** Linux mnt [SDBackup] SD Card資料夾 *****
 	1. 複製SDBackup至下列路徑
 		~/home/user/shared/buildroot/MA35D1_Buildroot/output/target/mnt
-	***** Linux lib [firmware] M4 firmware資料夾 *****
+	***** Linux lib [firmware] firmware資料夾 *****
 	1. 複製firmware至下列路徑
 		~/home/user/shared/buildroot/MA35D1_Buildroot/output/target/lib
 
