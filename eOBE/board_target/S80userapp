@@ -1,7 +1,5 @@
 #! /bin/sh
 
-insmod /lib/modules/`uname -r`/8821cu.ko
-
 #setup wlan0
 echo "<< Setup wlan0 >>"
 iw reg set TW

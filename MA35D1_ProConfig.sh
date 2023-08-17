@@ -15,6 +15,7 @@ etcPath="/home/user/shared/buildroot/MA35D1_Buildroot/output/target/etc"
 fstabPath="/home/user/shared/buildroot/MA35D1_Buildroot/output/target/etc"
 mountFolderPath="/home/user/shared/buildroot/MA35D1_Buildroot/output/target/mnt"
 firmwareFolderPath="/home/user/shared/buildroot/MA35D1_Buildroot/output/target/lib"
+libmoduleFolderPath="/home/user/shared/buildroot/MA35D1_Buildroot/output/target/lib/modules"
 
 # Get Input Project Folder Name
 ProName=$1
@@ -75,10 +76,11 @@ cp -f ./common/shadow $etcPath
 echo "copy common - network interfaces file ..."
 cp -f ./common/interfaces $etcPath/network
 
-# copy common - wpa config files
+# copy common - wpa/hostapd config files
 echo "copy common - wpa config file ..."
 cp -f ./common/wpa_supplicant_open.conf $etcPath
 cp -f ./common/wpa_supplicant_wpa2.conf $etcPath
+cp -f ./common/hostapd.conf $etcPath
 
 # copy common - fstab file
 echo "copy common - fstab file ..."
@@ -91,6 +93,13 @@ cp -rf ./common/SDBackup $mountFolderPath
 # copy common - firmware file
 echo "copy common - firmware folder ..."
 cp -rf ./common/firmware $firmwareFolderPath
+
+# copy common - rtl8821cu.ko file
+echo "copy common - wifi rtl8821cu.ko file ..."
+cp -f ./common/8821cu.ko $libmoduleFolderPath
+cp -f ./common/cfg80211.ko $libmoduleFolderPath
+cp -f ./common/brcmutil.ko $libmoduleFolderPath
+cp -f ./common/brcmfmac.ko $libmoduleFolderPath
 
 nowTime=$(TZ=Asia/Taipei date -d @`date +%s` "+%Y-%m-%d %H:%M:%S")
 echo "*** Recovery Project Config Done [$nowTime] ***"

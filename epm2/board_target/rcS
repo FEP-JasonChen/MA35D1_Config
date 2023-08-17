@@ -1,9 +1,10 @@
 #!/bin/sh
 
 mount -t debugfs debugfs /sys/kernel/debug
-#insmod /lib/modules/`uname -r`/kernel/net/wireless/cfg80211.ko
-#insmod /lib/modules/`uname -r`/cfg80211.ko
-#insmod /lib/modules/`uname -r`/kernel/net/mac80211/mac80211.ko
+insmod /lib/modules/cfg80211.ko
+insmod /lib/modules/brcmutil.ko
+insmod /lib/modules/brcmfmac.ko
+insmod /lib/modules/8821cu.ko
 
 #setup eth0
 echo "<< Setup eth0 >>"
